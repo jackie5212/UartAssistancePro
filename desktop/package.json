@@ -1,0 +1,30 @@
+{
+  "name": "desktop",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "tauri:dev:raw": "tauri dev",
+    "tauri:dev": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"Write-Host '[提示] 启动前检查端口 18420...'; $p=(Get-NetTCPConnection -LocalPort 18420 -State Listen -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique); if($p){$p|ForEach-Object{Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue}; Write-Host '[提示] 已清理端口占用进程';} else {Write-Host '[提示] 端口空闲';}; Write-Host '[提示] 正在启动 Tauri，首次编译可能需要 3-10 分钟，成功后会弹出桌面窗口'; npm.cmd run tauri:dev:raw\""
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-opener": "^2",
+    "echarts": "^6.0.0",
+    "jspdf": "^4.2.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.6.0",
+    "typescript": "~5.8.3",
+    "vite": "^7.0.4"
+  }
+}
